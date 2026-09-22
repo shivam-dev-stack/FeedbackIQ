@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" fill="none" className="h-8 w-auto">
+  <!-- Icon Mark -->
+  <g transform="translate(0, 0)">
+    <!-- Outer Speech Bubble Background -->
+    <path 
+      d="M25 4C13.954 4 5 12.507 5 23c0 4.707 1.764 9.017 4.717 12.336L7 43l8.03-3.084C17.658 40.598 21.233 42 25 42c11.046 0 20-8.507 20-19S36.046 4 25 4z" 
+      fill="url(#feedbackGrad)" 
+      filter="drop-shadow(0px 2px 4px rgba(79, 70, 229, 0.2))"
+    />
+    <!-- AI / IQ Wave Bars inside bubble -->
+    <path 
+      d="M14 24h3v6h-3zM19 18h3v12h-3zM24 21h3v9h-3zM29 15h3v15h-3zM34 20h3v10h-3z" 
+      fill="#FFFFFF" 
+      rx="1.5"
+    />
+  </g>
+
+  <!-- Brand Typography -->
+  <text x="56" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#1F2937">
+    feedback<tspan fill="#4F46E5">IQ</tspan>
+  </text>
+
+  <!-- Gradient Definition -->
+  <defs>
+    <linearGradient id="feedbackGrad" x1="5" y1="4" x2="45" y2="42" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6366F1" />
+      <stop offset="1" stop-color="#4F46E5" />
+    </linearGradient>
+  </defs>
+</svg>
