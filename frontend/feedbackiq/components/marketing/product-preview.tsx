@@ -16,7 +16,7 @@ export default function ProductPreview({ previewImageSrc }: ProductPreviewProps)
     ];
 
     return (
-        <section className="py-20 bg-gradient-to-b from-white to-purple-50/20 overflow-hidden">
+        <section className="py-20 bg-gradient-to-b from-white to-purple-50/20 overflow-hidden" id="product">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">

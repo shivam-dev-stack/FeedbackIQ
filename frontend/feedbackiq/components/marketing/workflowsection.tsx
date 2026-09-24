@@ -24,7 +24,7 @@ export default function WorkflowSection() {
     ];
 
     return (
-        <section className="pt-20 pb-10 bg-gradient-to-b from-white to-purple-50/20">
+        <section className="pt-20 pb-10 bg-gradient-to-b from-white to-purple-50/20" id="use-cases">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 
                 <div className="inline-flex items-center px-3 py-1 rounded-full bg-purple-100/60 text-purple-800 text-xs font-semibold mb-4">

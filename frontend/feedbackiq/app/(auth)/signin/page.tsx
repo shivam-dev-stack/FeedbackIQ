@@ -1,14 +1,15 @@
+'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-export default function SignUp() {
-    const [fullName, setFullName] = useState('');
+export default function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [rememberMe, setRememberMe] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle registration logic & redirect to verify email (Step 3A.1)
+        // Handle login logic & redirect to Dashboard (Step 5)
     };
 
     return (
@@ -20,21 +21,10 @@ export default function SignUp() {
                     <span className="font-bold text-lg text-gray-900">FeedbackIQ</span>
                 </div>
 
-                <h1 className="text-2xl font-extrabold text-gray-900 mb-1">Create your account</h1>
-                <p className="text-sm text-gray-500 mb-6">Start analyzing your customer feedback today.</p>
+                <h1 className="text-2xl font-extrabold text-gray-900 mb-1">Welcome back</h1>
+                <p className="text-sm text-gray-500 mb-6">Sign in to your account</p>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Full name</label>
-                        <input
-                            type="text"
-                            placeholder="John Doe"
-                            value={fullName}
-                            onChange={(e) => setFullName(e.target.value)}
-                            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-purple-600"
-                            required
-                        />
-                    </div>
+                <form onSubmit={handleLogin} className="space-y-4">
                     <div>
                         <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Work email</label>
                         <input
@@ -58,16 +48,29 @@ export default function SignUp() {
                         />
                     </div>
 
+                    <div className="flex items-center justify-between text-xs py-1">
+                        <label className="flex items-center gap-2 text-gray-600 cursor-pointer">
+                            <input
+                                type="checkbox"
+                                checked={rememberMe}
+                                onChange={(e) => setRememberMe(e.target.checked)}
+                                className="rounded border-gray-300 text-purple-600 focus:ring-purple-500"
+                            />
+                            Remember me
+                        </label>
+                        <a href="#forgot" className="text-purple-600 font-semibold hover:underline">Forgot password?</a>
+                    </div>
+
                     <button
                         type="submit"
-                        className="w-full py-3.5 rounded-xl bg-purple-600 text-white text-sm font-medium hover:bg-purple-700 transition-all shadow-md mt-2"
+                        className="w-full py-3.5 rounded-xl bg-purple-600 text-white text-sm font-medium hover:bg-purple-700 transition-all shadow-md"
                     >
-                        Create account
+                        Sign in
                     </button>
                 </form>
 
                 <p className="text-center text-xs text-gray-500 mt-6">
-                    Already have an account? <Link href="/signin" className="text-purple-600 font-semibold hover:underline">Sign in</Link>
+                    Don't have an account? <Link href="/signup" className="text-purple-600 font-semibold hover:underline">Sign up</Link>
                 </p>
 
             </div>
