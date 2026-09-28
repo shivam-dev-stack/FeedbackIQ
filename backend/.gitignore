@@ -1,0 +1,43 @@
+# --- Python Bytecode & Cache ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Virtual Environments ---
+.venv/
+venv/
+env/
+ENV/
+dist/
+build/
+*.egg-info/
+
+# --- Environment Variables & Secrets (CRITICAL) ---
+.env
+.env.*
+.env.example
+*.pem
+
+# --- Databases (If using SQLite locally) ---
+*.sqlite3
+*.db
+
+# --- IDEs and Editors ---
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# --- Operating System Files ---
+.DS_Store
+Thumbs.db
+
+# --- Logs ---
+*.log
