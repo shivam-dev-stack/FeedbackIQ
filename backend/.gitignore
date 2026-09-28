@@ -1,43 +1,76 @@
-# --- Python Bytecode & Cache ---
+# =========================
+# Environment / Secrets
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Python
+# =========================
 __pycache__/
 *.py[cod]
 *$py.class
-*.so
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
 
-# --- Virtual Environments ---
+# Virtual environments
 .venv/
 venv/
 env/
 ENV/
-dist/
+
+# =========================
+# Testing / Coverage
+# =========================
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# =========================
+# Type checking / Linters
+# =========================
+.mypy_cache/
+.ruff_cache/
+.pyre/
+
+# =========================
+# Build / Packaging
+# =========================
 build/
+dist/
 *.egg-info/
+.eggs/
 
-# --- Environment Variables & Secrets (CRITICAL) ---
-.env
-.env.*
-.env.example
-*.pem
-
-# --- Databases (If using SQLite locally) ---
-*.sqlite3
-*.db
-
-# --- IDEs and Editors ---
+# =========================
+# IDE / Editors
+# =========================
 .vscode/
 .idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
 *.swp
+*.swo
 
-# --- Operating System Files ---
+# =========================
+# OS
+# =========================
 .DS_Store
 Thumbs.db
 
-# --- Logs ---
+# =========================
+# Logs
+# =========================
 *.log
+
+# =========================
+# Local database / temp files
+# =========================
+*.sqlite
+*.sqlite3
+*.db
+
+# =========================
+# Alembic
+# =========================
+# DO NOT ignore alembic migrations.
+# alembic/versions/*.py should be committed.
