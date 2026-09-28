@@ -113,6 +113,7 @@ Insights Dashboard
 
 * [x] Landing page
 * [x] Authentication
+* [x] Database configuration
 * [ ] Organization & project management
 * [ ] Manual feedback collection
 * [ ] CSV / Excel ingestion
@@ -137,4 +138,4 @@ FeedbackIQ is currently under active development. Features, architecture, and te
 
 **Built with curiosity, code, and AI.**
 
-#BuildInPublic #AI #SaaS #MachineLearning
+#BuildInPublic #AI #SaaS #Fullstack
