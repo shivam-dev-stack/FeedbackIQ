@@ -1,3 +1,6 @@
+''' Organization Member Model '''
+
+
 import uuid
 from datetime import datetime
 

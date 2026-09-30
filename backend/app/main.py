@@ -4,7 +4,7 @@ from sqlalchemy  import text
 
 from fastapi import Depends
 from app.core.security import get_current_user
-
+from app.api.routes.auth import router as auth_router
 
 
 
@@ -12,6 +12,8 @@ app = FastAPI(
     title="FeedbackIQ API",
     version="0.1.0",
 )
+
+app.include_router(auth_router)
 
 
 @app.get("/me")

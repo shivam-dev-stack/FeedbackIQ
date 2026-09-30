@@ -1,3 +1,5 @@
+''' User Model '''
+
 import uuid
 from datetime import datetime
 

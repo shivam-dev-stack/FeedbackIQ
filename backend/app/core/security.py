@@ -1,16 +1,10 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-from supabase import create_client
 
-from app.core.config import settings
+from app.core.supabase import supabase
 
 
 bearer_scheme = HTTPBearer()
-
-supabase = create_client(
-    settings.SUPABASE_URL,
-    settings.SUPABASE_ANON_KEY,
-)
 
 
 def get_access_token(
