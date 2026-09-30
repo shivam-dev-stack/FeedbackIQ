@@ -1,8 +1,18 @@
 import uuid
 from datetime import datetime
-from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy import DateTime, ForeignKey, Integer, JSON, Numeric, String, Text, func
-from sqlalchemy.dialects.postgresql import UUID
+
+from sqlalchemy import (
+    DateTime,
+    ForeignKey,
+    Index,
+    Integer,
+    Numeric,
+    String,
+    Text,
+    UniqueConstraint,
+    func,
+)
+from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.database import Base
@@ -64,4 +74,20 @@ class FeedbackRecord(Base):
         DateTime(timezone=True),
         nullable=False,
         server_default=func.now(),
+    )
+    
+    __table_args__ = (
+        UniqueConstraint(
+            "document_id",
+            "row_number",
+            name="feedback_records_document_id_row_number_key",
+        ),
+        Index(
+            "idx_feedback_records_document_id",
+            "document_id",
+        ),
+        Index(
+            "idx_feedback_records_external_id",
+            "external_id",
+        ),
     )

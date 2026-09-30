@@ -1,9 +1,10 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime, ForeignKey, JSON, Numeric, String, Text, func
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import DateTime, ForeignKey, Numeric, String, Text, func, Index
+from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.schema import UniqueConstraint
 
 from app.core.database import Base
 
@@ -39,31 +40,31 @@ class FeedbackAnalysis(Base):
     )
 
     topics: Mapped[list] = mapped_column(
-        JSON,
+        JSONB,
         nullable=False,
         default=list,
     )
 
     positives: Mapped[list] = mapped_column(
-        JSON,
+        JSONB,
         nullable=False,
         default=list,
     )
 
     negatives: Mapped[list] = mapped_column(
-        JSON,
+        JSONB,
         nullable=False,
         default=list,
     )
 
     improvements: Mapped[list] = mapped_column(
-        JSON,
+        JSONB,
         nullable=False,
         default=list,
     )
 
     suggestions: Mapped[list] = mapped_column(
-        JSON,
+        JSONB,
         nullable=False,
         default=list,
     )
@@ -73,11 +74,22 @@ class FeedbackAnalysis(Base):
     )
 
     raw_output: Mapped[dict | None] = mapped_column(
-        JSON,
+        JSONB,
     )
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
         server_default=func.now(),
+    )
+
+    __table_args__ = (
+        UniqueConstraint(
+            "feedback_record_id",
+            "analysis_run_id",
+            name="feedback_analyses_feedback_record_id_analysis_run_id_key",
+        ),
+        Index("idx_feedback_analyses_record_id", "feedback_record_id"),
+        Index("idx_feedback_analyses_run_id", "analysis_run_id"),
+        Index("idx_feedback_analyses_sentiment", "sentiment"),
     )

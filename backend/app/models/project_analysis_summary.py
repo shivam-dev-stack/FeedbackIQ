@@ -1,8 +1,17 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime, ForeignKey, Integer, JSON, Numeric, Text, func
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import (
+    DateTime,
+    ForeignKey,
+    Index,
+    Integer,
+    Numeric,
+    Text,
+    UniqueConstraint,
+    func,
+)
+from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.database import Base
@@ -64,31 +73,31 @@ class ProjectAnalysisSummary(Base):
     )
 
     sentiment_distribution: Mapped[dict] = mapped_column(
-        JSON,
+        JSONB,
         nullable=False,
         default=dict,
     )
 
     top_topics: Mapped[list] = mapped_column(
-        JSON,
+        JSONB,
         nullable=False,
         default=list,
     )
 
     common_positives: Mapped[list] = mapped_column(
-        JSON,
+        JSONB,
         nullable=False,
         default=list,
     )
 
     common_negatives: Mapped[list] = mapped_column(
-        JSON,
+        JSONB,
         nullable=False,
         default=list,
     )
 
     improvement_suggestions: Mapped[list] = mapped_column(
-        JSON,
+        JSONB,
         nullable=False,
         default=list,
     )
@@ -101,4 +110,20 @@ class ProjectAnalysisSummary(Base):
         DateTime(timezone=True),
         nullable=False,
         server_default=func.now(),
+    )
+
+    __table_args__ = (
+        UniqueConstraint(
+            "project_id",
+            "analysis_run_id",
+            name="project_analysis_summaries_project_id_analysis_run_id_key",
+        ),
+        Index(
+            "idx_project_summaries_project_id",
+            "project_id",
+        ),
+        Index(
+            "idx_project_summaries_analysis_run_id",
+            "analysis_run_id",
+        ),
     )

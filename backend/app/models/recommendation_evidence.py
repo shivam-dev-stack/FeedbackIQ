@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime, ForeignKey, Numeric, String, Text, func
+from sqlalchemy import DateTime, ForeignKey, Numeric, String, Text, func, Index, UniqueConstraint
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -51,4 +51,24 @@ class RecommendationEvidence(Base):
         DateTime(timezone=True),
         nullable=False,
         server_default=func.now(),
+    )
+
+    __table_args__ = (
+        UniqueConstraint(
+            "recommendation_id",
+            "feedback_record_id",
+            name="recommendation_evidence_recommendation_id_feedback_record_i_key",
+        ),
+        Index(
+            "idx_recommendation_evidence_recommendation_id",
+            "recommendation_id",
+        ),
+        Index(
+            "idx_recommendation_evidence_feedback_record_id",
+            "feedback_record_id",
+        ),
+        Index(
+            "idx_recommendation_evidence_analysis_id",
+            "feedback_analysis_id",
+        ),
     )

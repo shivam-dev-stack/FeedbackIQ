@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime, ForeignKey, String, Text, func
+from sqlalchemy import DateTime, ForeignKey, Index, String, Text, func
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -10,6 +10,12 @@ from app.core.database import Base
 
 class Recommendation(Base):
     __tablename__ = "recommendations"
+
+    __table_args__ = (
+        Index("idx_recommendations_analysis_run_id", "analysis_run_id"),
+        Index("idx_recommendations_project_id", "project_id"),
+        Index("idx_recommendations_status", "status"),
+    )
 
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True),

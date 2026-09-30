@@ -1,8 +1,16 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime, String, ForeignKey, func
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import (
+    DateTime,
+    ForeignKey,
+    Index,
+    String,
+    UniqueConstraint,
+    func,
+    text,
+)
+from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.database import Base
@@ -39,4 +47,26 @@ class OrganizationMember(Base):
         DateTime(timezone=True),
         nullable=False,
         server_default=func.now(),
+    )
+
+    __table_args__ = (
+        UniqueConstraint(
+            "organization_id",
+            "user_id",
+            name="organization_members_organization_id_user_id_key",
+        ),
+        Index(
+            "idx_organization_members_organization_id",
+            "organization_id",
+        ),
+        Index(
+            "idx_organization_members_user_id",
+            "user_id",
+        ),
+        Index(
+            "one_owner_per_organization",
+            "organization_id",
+            unique=True,
+            postgresql_where=text("role = 'owner'"),
+        ),
     )

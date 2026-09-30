@@ -1,15 +1,21 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime, ForeignKey, String, Text, func
+from sqlalchemy import DateTime, ForeignKey, Index, String, Text, func
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
+
 
 from app.core.database import Base
 
 
 class Project(Base):
     __tablename__ = "projects"
+
+    __table_args__ = (
+            Index("idx_projects_organization_id", "organization_id"),
+            Index("idx_projects_created_by", "created_by"),
+        )
 
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True),
@@ -48,3 +54,5 @@ class Project(Base):
         nullable=False,
         server_default=func.now(),
     )
+
+   

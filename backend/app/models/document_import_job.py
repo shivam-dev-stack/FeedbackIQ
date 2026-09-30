@@ -1,8 +1,8 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime, ForeignKey, Integer, JSON, String, func
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import DateTime, ForeignKey, Index, Integer, String, func
+from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.database import Base
@@ -10,6 +10,11 @@ from app.core.database import Base
 
 class DocumentImportJob(Base):
     __tablename__ = "document_import_jobs"
+
+    __table_args__ = (
+        Index("idx_import_jobs_document_id", "document_id"),
+        Index("idx_import_jobs_status", "status"),
+    )
 
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True),
@@ -59,7 +64,7 @@ class DocumentImportJob(Base):
     )
 
     error_details: Mapped[list] = mapped_column(
-        JSON,
+        JSONB,
         nullable=False,
         default=list,
     )
