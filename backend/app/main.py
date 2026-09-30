@@ -2,10 +2,24 @@ from fastapi import FastAPI
 from app.core.database import AsyncSessionLocal
 from sqlalchemy  import text
 
+from fastapi import Depends
+from app.core.security import get_current_user
+
+
+
+
 app = FastAPI(
     title="FeedbackIQ API",
     version="0.1.0",
 )
+
+
+@app.get("/me")
+async def get_me(user=Depends(get_current_user)):
+    return {
+        "id": str(user.id),
+        "email": user.email,
+    }
 
 
 @app.get("/health")
