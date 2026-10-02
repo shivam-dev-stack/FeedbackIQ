@@ -13,7 +13,7 @@ export default function Navbar({ Logo }: { Logo?: string }) {
   const navLinks = [
     { name: 'Product', href: '#product' },
     { name: 'Use Cases', href: '#use-cases' },
-    { name: 'Pricing', href: '#pricing' },
+    { name: 'Pricing', href: '/pricing' },
     { name: 'Resources', href: '#resources' },
   ];
 
@@ -31,13 +31,13 @@ export default function Navbar({ Logo }: { Logo?: string }) {
             {/* Desktop Navigation Links */}
             <nav className="hidden md:flex items-center space-x-8">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
                   href={link.href}
                   className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
             </nav>
 

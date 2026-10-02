@@ -1,15 +1,32 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { login } from '@/lib/authApi';
 
 export default function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
+    const [error, setError] = useState('');
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // Handle login logic & redirect to Dashboard (Step 5)
+        const data = await login({
+            email,
+            password
+        });
+        try {
+            if (data.status === '200' && data.success) {
+                // Redirect to dashboard or another page after successful login
+                window.location.href = '/dashboard';
+            } else {
+                setError(data.message || 'Login failed. Please try again.');
+                console.error('Login failed:', data);
+            }
+        } catch (err) {
+            setError('An unexpected error occurred. Please try again later.');
+            console.error('Unexpected error:', err);
+        }
     };
 
     return (
@@ -68,6 +85,9 @@ export default function SignIn() {
                         Sign in
                     </button>
                 </form>
+
+                {error && 
+                <p className="text-red-500 text-sm mt-2">{error}</p>}
 
                 <p className="text-center text-xs text-gray-500 mt-6">
                     Don't have an account? <Link href="/signup" className="text-purple-600 font-semibold hover:underline">Sign up</Link>
