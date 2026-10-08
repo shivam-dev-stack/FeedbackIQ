@@ -6,6 +6,7 @@ from sqlalchemy  import text
 from fastapi import Depends
 from app.core.security import get_current_user
 from app.api.routes.auth import router as auth_router
+from app.api.routes import projects
 
 
 
@@ -25,6 +26,7 @@ app.add_middleware(
 )
 
 app.include_router(auth_router)
+app.include_router(projects.router)
 
 
 @app.get("/me")
