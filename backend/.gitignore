@@ -68,6 +68,7 @@ Thumbs.db
 *.sqlite
 *.sqlite3
 *.db
+supabase/
 
 # =========================
 # Alembic
